@@ -1,5 +1,6 @@
 <h1>View Csv File:</h1>
-
+<link rel="stylesheet" href="/css/csvDisplay.css">
+<script src="/js/csvDisplay.js"></script>
 <ul>
     <!-- <% for(var i in data){ %>
         <% var key = i;%>
@@ -10,11 +11,11 @@
             <p><%=sub_key%>: <%=sub_val%></p>
         <%}%>
     <%}%> -->
-    
-    <table>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+    <table id="myTable">
 
         <% for(var i in data){ %>
-            <tr>
+            <tr class="header">
                 <% var key = i;%>
                 <%var val = data[i];%>
                 <%for(var j in val){%>

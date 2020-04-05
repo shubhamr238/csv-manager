@@ -13,6 +13,9 @@ app.use(expressLayouts);
 // body parser for req.body
 app.use(express.urlencoded({extended: true}));
 
+//use assets folder
+app.use(express.static('./assets'));
+
 //make the uploads path avail to browser
 app.use('/uploads', express.static(__dirname+'/uploads'));
 
