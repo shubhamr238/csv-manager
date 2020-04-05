@@ -5,8 +5,8 @@ const multer=require('multer');
 // var upload = multer({ dest: 'uploads/' });
 const csvController = require('../controllers/csvController');
 
-const FileSchema=require('../models/csvFile');
 
+//defining multer storage as disk storage for local storage
 var storage=multer.diskStorage({
     destination: function(req, file, cb){
         cb(null,'uploads/');
@@ -16,6 +16,7 @@ var storage=multer.diskStorage({
     },
 });
 
+//defining upload specifications
 var upload=multer({
     storage: storage,
     fileFilter: function (req, file, cb) {
@@ -32,21 +33,6 @@ var upload=multer({
 //different routes
 router.get("/new",csvController.ViewUploadForm);
 
-router.post("/new", upload.single('csvFile') ,function(req, res, next){
-    const file = req.file;
-    if (!file) {
-        const error = new Error('Please upload a file');
-        error.httpStatusCode = 400;
-        return next(error);
-    }
-    FileSchema.create(file, function(err, file){
-        if(err){
-            console.log(err);
-        }
-        console.log(file);
-    });
-    res.send(file);
-    
-});
+router.post("/new", upload.single('csvFile') , csvController.upload);
 
 module.exports = router;
