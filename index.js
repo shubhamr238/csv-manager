@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const expressLayouts= require("express-ejs-layouts");
-
 const port = 8000;
+const db = require("./config/mongoose");
 
 //view engine
 app.set("view engine", "ejs");
@@ -12,6 +12,9 @@ app.use(expressLayouts);
 
 // body parser for req.body
 app.use(express.urlencoded({extended: true}));
+
+//make the uploads path avail to browser
+app.use('/uploads', express.static(__dirname+'/uploads'));
 
 //extract style and script from sub pages into the layout
 app.set('layout extractStyles', true);
