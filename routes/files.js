@@ -36,4 +36,6 @@ router.get("/new",csvController.ViewUploadForm);
 
 router.post("/new", upload.single('csvFile') , csvController.upload);
 
+router.get("/:id", csvController.csvDisplay);
+
 module.exports = router;

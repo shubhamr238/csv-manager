@@ -1,5 +1,6 @@
 const FileSchema=require('../models/csvFile');
-
+const parse=require("csv-parser");
+const fs = require('fs');
 
 module.exports.ViewUploadForm=function(req,res){
   res.render('upload', {
@@ -36,4 +37,27 @@ module.exports.getList=function(req, res){
     });
   });
   
+}
+
+module.exports.csvDisplay=function(req,res){
+  FileSchema.findById(req.params.id, function(err, file){
+    if(err){
+      console.log(err);
+      return;
+    }
+    let file_path=file.path;
+    const data = []
+    fs.createReadStream(file_path)
+      .pipe(parse({ delimiter: ',' }))
+      .on('data', (r) => {
+        // console.log(r);
+        data.push(r);        
+      }) 
+      .on('end', () => {
+        res.render('csvDisplay', {
+          title: "CSV Manager | Display CSV",
+          data: data,
+        });
+      })
+  });
 }
