@@ -5,5 +5,5 @@ const homeController=require('../controllers/homeController');
 
 
 router.get('/', homeController.home);
-router.use('/csv',require('./csv'));
+router.use('/files',require('./files'));
 module.exports=router;

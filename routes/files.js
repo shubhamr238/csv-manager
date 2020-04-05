@@ -30,9 +30,9 @@ var upload=multer({
 
 
 //different routes
-router.get("/upload",csvController.ViewUploadForm);
+router.get("/new",csvController.ViewUploadForm);
 
-router.post("/upload", upload.single('csvFile') ,function(req, res, next){
+router.post("/new", upload.single('csvFile') ,function(req, res, next){
     const file = req.file;
     if (!file) {
         const error = new Error('Please upload a file');
