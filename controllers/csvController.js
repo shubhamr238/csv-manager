@@ -23,3 +23,17 @@ module.exports.upload=function(req, res, next){
   res.send(file);
   
 }
+
+module.exports.getList=function(req, res){
+  const list=FileSchema.find({}, function(err, csv_list){
+    if(err){
+      console.log('error');
+      return;
+    }
+    res.render('uploadList', {
+      title: "CSV Manager | Upload List",
+      csv_list: csv_list,
+    });
+  });
+  
+}

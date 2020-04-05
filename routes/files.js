@@ -31,6 +31,7 @@ var upload=multer({
 
 
 //different routes
+router.get("/",csvController.getList);
 router.get("/new",csvController.ViewUploadForm);
 
 router.post("/new", upload.single('csvFile') , csvController.upload);
